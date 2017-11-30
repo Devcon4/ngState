@@ -1,42 +1,19 @@
-// Would be generated from a matching Issues controller.
+// Using a base service instead of being generated.
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { DataService, IssueModel } from './data.service';
-import { IActionable } from './ngState';
+import { IActionable, BaseService } from './ngState';
 
 @Injectable()
-export class IssueService implements IActionable<IssueModel> {
-  readonly _subject: BehaviorSubject<IssueModel | IssueModel[]> = BehaviorSubject.create();
-
-  constructor(private dataService: DataService) { }
-
-  getState() {
-    return this._subject;
+export class IssueService extends BaseService<IssueModel> {
+  constructor(private dataService: DataService) {
+    super(dataService.Issues);
   }
 
-  clear() {
-    this._subject.next(undefined);
+  readAllWithMatching(matchingIds: number[]) {
+    this.dataService.Issues.readAll()
+      .map((list: IssueModel[]) => list.filter(i => matchingIds.some(m => m === i.id)))
+      .subscribe(this._subject.next);
   }
-
-  read(id: number) {
-    this.dataService.Issues.read(id).subscribe(this._subject.next);
-  }
-
-  readList(list: IssueModel[] = []) {
-    this.dataService.Issues.readList(list).subscribe(this._subject.next);
-  }
-
-  readAll() {
-    this.dataService.Issues.readAll().subscribe(this._subject.next);
-  }
-
-  create(model: IssueModel) {
-    this.dataService.Issues.create(model).subscribe(this._subject.next);
-  }
-
-  deleteById(id: number) {
-    this.dataService.Issues.deleteById(id).subscribe(this._subject.next);
-  }
-
 }
