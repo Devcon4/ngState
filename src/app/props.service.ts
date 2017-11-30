@@ -20,23 +20,23 @@ export class PropService implements IActionable<PropModel> {
   }
 
   read(id: number) {
-    this.dataService.Issues.read(id).subscribe(this._subject.next);
+    this.dataService.Props.read(id).subscribe(this._subject.next);
   }
 
   readList(list: PropModel[] = []) {
-    this.dataService.Issues.readList(list).subscribe(this._subject.next);
+    this.dataService.Props.readList(list).subscribe(this._subject.next);
   }
 
   readAll() {
-    this.dataService.Issues.readAll().subscribe(this._subject.next);
+    this.dataService.Props.readAll().subscribe(this._subject.next);
   }
 
   create(model: PropModel) {
-    this.dataService.Issues.create(model).subscribe(this._subject.next);
+    this.dataService.Props.create(model).subscribe(this._subject.next);
   }
 
   deleteById(id: number) {
-    this.dataService.Issues.deleteById(id).subscribe(this._subject.next);
+    this.dataService.Props.deleteById(id).subscribe(this._subject.next);
   }
 
 }
