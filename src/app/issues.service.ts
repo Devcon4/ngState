@@ -14,6 +14,6 @@ export class IssueService extends BaseService<IssueModel> {
   readAllWithMatching(matchingIds: number[]) {
     this.dataService.Issues.readAll()
       .map((list: IssueModel[]) => list.filter(i => matchingIds.some(m => m === i.id)))
-      .subscribe(this._subject.next);
+      .subscribe(this.state.next);
   }
 }

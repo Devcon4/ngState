@@ -1,1 +1,2 @@
-<p *ngFor="let issue of issueService.getState() | async">{{issue.name}}</p>
+<label>{{propService.state | async}}</label>
+<p *ngFor="let issue of issueService.state | async">{{issue.name}}</p>
